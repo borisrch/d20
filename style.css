@@ -1,0 +1,97 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.frame {
+    width: 100%;
+    height: 600px;
+    margin: 20px;
+}
+
+.button-container {
+    justify-content: center;
+    padding: 20px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, minmax(auto, 150px));
+    align-items: center;
+    
+}
+
+.log-container {
+    text-align: center;
+}
+
+.combat-container {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.player-container {
+    padding: 20px;
+    
+}
+
+.monster-container {
+    font-family: 'Crimson Text', serif;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+}
+
+.combat {
+    font-size: 3em;
+}
+
+.log {
+    margin: auto;
+    padding: 20px;
+    width: 75%;
+    text-align: center;
+}
+
+.table-log {
+    margin: auto;
+    padding: 20px;
+    width: 75%;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/** Material Colour 300 **/
+
+.special-log {
+    background: #FFF176;
+}
+
+.cooldown-log {
+    background: #E0E0E0;
+}
+
+.heal-log {
+    background: #81C784;
+}
+
+.reward-log {
+    background: #4FC3F7
+}
+
+.dead {
+    background: #e57373;
+    font-weight: 700;
+}
+
+#weapon-select {
+    margin: auto;
+    max-width: 400px;
+    padding-top: 10px;
+}
+

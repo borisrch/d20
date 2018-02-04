@@ -1,0 +1,40 @@
+{
+    "monster" : [
+        {
+            "name" : "Goblin",
+            "health" : "20",
+            "armour" : "5",
+            "damage" : "6"
+        },
+        {
+            "name" : "Hill Giant",
+            "health" : "40",
+            "armour" : "8",
+            "damage" : "8"
+        },
+        {
+            "name" : "Minotaur",
+            "health" : "60",
+            "armour" : "10",
+            "damage" : "8"
+        },
+        {
+            "name" : "Werewolf",
+            "health" : "60",
+            "armour" : "10",
+            "damage" : "10"
+        },
+        {
+            "name" : "Griffin",
+            "health" : "100",
+            "armour" : "12",
+            "damage" : "12"
+        },
+        {
+            "name" : "Red Dragon",
+            "health" : "120",
+            "armour" : "14",
+            "damage" : "12"
+        }        
+    ]
+}
