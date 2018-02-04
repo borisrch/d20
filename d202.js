@@ -25,10 +25,16 @@ var turn = 0;
 var currentPotion = 4;
 var healTurn = 0;
 
+// Used for Griffin's special next turn recoil ability.
+
+var griffinVar = 80;
+var griffinToggle = false;
+
 function update() {
     $("#monster-health").html(monsterHealth);
     $("#player-health").html(health);
     $("#player-potion").html('Health Potions: ' + currentPotion);
+    $("#player-armour").html('Armour Class: ' + armour);
 };
 
 function render() {
@@ -36,6 +42,7 @@ function render() {
 };
 
 function handler(action) {
+
 
     $('#attack').attr('disabled', 'disabled');
     $('#special').attr('disabled', 'disabled');
@@ -124,8 +131,7 @@ function specialHandler() {
             break;
 
             case weapon[3]:
-            // Whip
-            damage = 10;
+            whip();
             break;
 
             case weapon[4]:
@@ -134,7 +140,7 @@ function specialHandler() {
             break;
 
             case weapon[4]:
-            damage = 12;
+
             break;
 
             default:
@@ -233,6 +239,59 @@ function greataxe() {
     }    
 }
 
+function whip() {
+    let result = attack(5, monsterArmour, 2);
+    if (result != 0) {
+        updateLog('<b>You </b> <i>Soul Split</i> for ' + result + ' damage, and heal for ' + result + '! ' + 'Turn: ' + turn, 'special-log');
+        health += result;
+        soundHandler('whip');
+        if (result >= monsterHealth) {
+            // Damage more than monster's health
+            $("#monster-health").html("0");
+            monsterDeath();
+        } else {
+            // Damage less than monster's health
+            monsterHealth = monsterHealth - result;
+            update();
+            setTimeout(function () {
+                monsterAttack(monsterCount);
+            }, 1000);
+        }
+    } else {
+        updateLog('<b>You</b> missed! ' + 'Turn: ' + turn);
+        soundHandler('miss');
+        setTimeout(function () {
+            monsterAttack(monsterCount);
+        }, 1000);
+    }        
+}
+
+function scythe() {
+    let result = attack(10, monsterArmour, 3);
+    if (result != 0) {
+        updateLog('<b>You </b> <i>Elven Guillotine</i> for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log');
+        soundHandler('scythe');
+        if (result >= monsterHealth) {
+            // Damage more than monster's health
+            $("#monster-health").html("0");
+            monsterDeath();
+        } else {
+            // Damage less than monster's health
+            monsterHealth = monsterHealth - result;
+            update();
+            setTimeout(function () {
+                monsterAttack(monsterCount);
+            }, 1000);
+        }
+    } else {
+        updateLog('<b>You</b> missed! ' + 'Turn: ' + turn);
+        soundHandler('miss');
+        setTimeout(function () {
+            monsterAttack(monsterCount);
+        }, 1000);
+    }    
+}
+
 // Monster attack logic. Add % for chance to hit. Seperate monster logic.
 
 function monsterAttack(monsterCount) {
@@ -247,6 +306,12 @@ function monsterAttack(monsterCount) {
 
         case 2:
             minotaur();
+            break;
+        case 3:
+            werewolf();
+            break;
+        case 4:
+            griffin();
             break;
     }
 }
@@ -289,6 +354,7 @@ function hillgiant() {
     
         } else {
             updateLog('<b>Hill Giant</b> missed! ' + 'Turn: ' + turn)
+            soundHandler('miss');
         }
     }   else {
         let result = attack(monsterDamage, armour, 1);
@@ -323,7 +389,7 @@ function minotaur() {
         let result = attack(8, reduction, 1);
         if (result != 0) {
             updateLog('<b>Minotaur </b> <i>Stampedes</i> for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
-    
+            soundHandler('minotaur-1');
             if (result >= health) {
                 playerDeath();
             } else {
@@ -332,15 +398,17 @@ function minotaur() {
             }    
         } else {
             updateLog('<b>Minotaur</b> missed! ' + 'Turn: ' + turn)
+            soundHandler('miss');
         }
     } else if (ability >= 1 && ability < 21) {
         updateLog('<b>Minotaur </b> uses <i>Unbreakable!</i> buffing AC to 15 agaisnt your next attack!' + 'Turn: ' + turn, 'special-log')
         monsterArmour = 10 + 5;
+        soundHandler('minotaur-2');
     } else {
         let result = attack(monsterDamage, armour, 1);
         if (result != 0) {
             updateLog('<b>Minotaur</b> hit you for ' + result + ' damage! ' + 'Turn: ' + turn)
-    
+            soundHandler('minotaur');
             if (result >= health) {
                 playerDeath();
             } else {
@@ -350,9 +418,183 @@ function minotaur() {
     
         } else {
             updateLog('<b>Minotaur</b> missed! ' + 'Turn: ' + turn)
+            soundHandler('miss');
         }
     }
 
+}
+
+function werewolf() {
+        turn++;
+        
+        let ability = roll(100);
+        console.log("Werewolf " + ability);
+        if (ability >= 90) {
+            let result = attack(10, armour - 5, 1);
+            if (result != 0) {
+                updateLog('<b>Werewolf </b> uses <i>Fears</i> for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+                soundHandler('werewolf-1');
+
+                if (result >= health) {
+                    playerDeath();
+                } else {
+                    health = health - result;
+                    update();
+                }
+        
+            } else {
+                updateLog('<b>Werewolf</b> missed! ' + 'Turn: ' + turn)
+                soundHandler('miss');
+            }
+        }
+        else if (ability < 90 && ability >= 80) {
+            let result = attack(10, armour, 2);
+            if (result != 0) {
+                updateLog('<b>Werewolf </b> uses <i>Predatory</i> for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+                soundHandler('werewolf');
+                if (result >= health) {
+                    playerDeath();
+                } else {
+                    health = health - result;
+                    update();
+                }
+        
+            } else {
+                updateLog('<b>Werewolf</b> missed! ' + 'Turn: ' + turn)
+                soundHandler('miss');
+            }
+        } else if (ability < 80 && ability >= 60) {
+            let result = attack(10, armour, 1);
+            if (result != 0) {
+                let special = roll(12);
+                monsterHealth = monsterHealth + special;
+                updateLog('<b>Werewolf </b> uses <i>Regenerate</i> for '+ special + ' HP, and deals ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+                soundHandler('werewolf-2');
+                if (result >= health) {
+                    playerDeath();
+                } else {
+                    health = health - result;
+                    update();
+                }
+        
+            } else {
+                updateLog('<b>Werewolf</b> missed! ' + 'Turn: ' + turn)
+                soundHandler('miss');
+            }            
+        } else {
+            let result = attack(monsterDamage, armour, 1);
+            if (result != 0) {
+                updateLog('<b>Werewolf</b> hit you for ' + result + ' damage! ' + 'Turn: ' + turn)
+                soundHandler('werewolf');
+        
+                if (result >= health) {
+                    playerDeath();
+                } else {
+                    health = health - result;
+                    update();
+                }
+        
+            } else {
+                updateLog('<b>Werewolf</b> missed! ' + 'Turn: ' + turn);
+                soundHandler('miss');
+            }
+        }
+}
+
+function griffin() {
+    turn++;
+
+    if(monsterHealth < griffinVar && griffinToggle == true) {
+        let roar = griffinVar - monsterHealth;
+        
+        updateLog("The <b>Griffin's </b> <i>Roar</i> ability recoils back " + roar + " damage!", 'special-log');
+        if (roar >= health) {
+            playerDeath();
+        } else {
+            health = health - roar;
+            update();
+        }
+        griffinToggle = false;        
+        } else {
+            griffinToggle = false;
+        }
+
+    let ability = roll(100);
+    if (ability >= 80) {
+        griffinVar = monsterHealth;
+        griffinToggle = true;
+        updateLog("<b>Griffin</b> uses <i>Roar</i>!")
+        soundHandler('griffin-1');
+
+    } else if (ability < 80 && ability >= 70) {
+        let result = attack(20, armour, 1);
+        if (result != 0) {
+            updateLog('<b>Griffin</b> <i>Skydives</i> you for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+            soundHandler('griffin-2');
+    
+            if (result >= health) {
+                playerDeath();
+            } else {
+                health = health - result;
+                update();
+            }
+    
+        } else {
+            updateLog('<b>Griffin</b> missed! ' + 'Turn: ' + turn);
+            soundHandler('miss');
+        }
+    } else if (ability < 70 && ability >= 60) {
+        let result = attack(12, 0, 1);
+        if (result != 0) {
+            updateLog('<b>Griffin</b> uses <i>Iron Talons</i> for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+            soundHandler('griffin-2');
+    
+            if (result >= health) {
+                playerDeath();
+            } else {
+                health = health - result;
+                update();
+            }
+    
+        } else {
+            updateLog('<b>Griffin</b> missed! ' + 'Turn: ' + turn);
+            soundHandler('miss');
+        }
+    } else if (ability < 60 && ability >= 50) {
+        let result = attack(6, armour, 3);
+        if (result != 0) {
+            updateLog('<b>Griffin </b> <i>Acid Spits</i> you for ' + result + ' damage! ' + 'Turn: ' + turn, 'special-log')
+            soundHandler('griffin-2');
+    
+            if (result >= health) {
+                playerDeath();
+            } else {
+                health = health - result;
+                update();
+            }
+    
+        } else {
+            updateLog('<b>Griffin</b> missed! ' + 'Turn: ' + turn);
+            soundHandler('miss');
+        }
+    } else {
+        let result = attack(12, armour, 1);
+        if (result != 0) {
+            updateLog('<b>Griffin</b> hits you for ' + result + ' damage! ' + 'Turn: ' + turn)
+            soundHandler('griffin');
+    
+            if (result >= health) {
+                playerDeath();
+            } else {
+                health = health - result;
+                update();
+            }
+    
+        } else {
+            updateLog('<b>Griffin</b> missed! ' + 'Turn: ' + turn);
+            soundHandler('miss');
+        }
+    }
 }
 
 
@@ -389,15 +631,34 @@ function monsterDeath() {
             monsterHealth = 60;
             update();
             break;
+        
+        case 3:
+            // Werewolf
+            armour = 10;
+            monsterArmour = 10;
+            monsterDamage = 10;
+            monsterHealth = 60;
+            update();
+            break;
+
+        case 4:
+            // Griffin 
+            monsterArmour = 12;
+            monsterDamage = 12;
+            monsterHealth = 80;
+            update();
+            break;
     }
 }
 
 function playerDeath() {
     updateLog('Oh dear, you are dead!', 'dead');
-    $('#attack').attr('disabled', 'disabled');
-    $('#special').attr('disabled', 'disabled');
-    $('#heal').attr('disabled', 'disabled');
-    $('#flee').attr('disabled', 'disabled');
+    health = 0;
+    update();
+    $('#attack').remove();
+    $('#special').remove();
+    $('#heal').remove();
+    $('#flee').remove();
 }
 
 function weaponSwitch() {
@@ -512,7 +773,7 @@ $(document).ready(function () {
 
     let attack = "Make an attack roll.";
     let special = "Perform a special attack. Specials take 4 turns to recharge."
-    let heal = "Drink a health potion. Potions take 4 turns to rechrage."
+    let heal = "Heal for 1d10 damage. Potions take 4 turns to recharge."
 
     $('#attack').attr('title', attack);
     $('#special').attr('title', special);
@@ -595,10 +856,78 @@ function soundHandler(sound) {
         var audio = new Audio('assets/hillgiant.mp3');
         audio.volume = 0.1;
         audio.play();
+        break;
 
         case 'hillgiant-1':
         var audio = new Audio('assets/hillgiant-1.mp3');
         audio.volume = 0.1;
         audio.play();
+        break;
+
+        case 'minotaur':
+        var audio = new Audio('assets/minotaur.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'minotaur-1':
+        var audio = new Audio('assets/minotaur-1.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'minotaur-2':
+        var audio = new Audio('assets/minotaur-2.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'werewolf':
+        var audio = new Audio('assets/werewolf.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'werewolf-1':
+        var audio = new Audio('assets/werewolf-1.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'werewolf-2':
+        var audio = new Audio('assets/werewolf-2.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'whip':
+        var audio = new Audio('assets/whip.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'griffin':
+        var audio = new Audio('assets/griffin.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'griffin-1':
+        var audio = new Audio('assets/griffin-1.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'griffin-2':
+        var audio = new Audio('assets/griffin-2.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;
+
+        case 'scythe':
+        var audio = new Audio('assets/scythe.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;       
     }
 }
