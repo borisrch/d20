@@ -30,6 +30,10 @@ var healTurn = 0;
 var griffinVar = 80;
 var griffinToggle = false;
 
+// Used for block ability
+var armourBuff = false;
+var normalArmour = armour;
+
 function update() {
     $("#monster-health").html(monsterHealth);
     $("#player-health").html(health);
@@ -58,9 +62,8 @@ function handler(action) {
     } else if (action == "heal") {
         heal();
         setTimeout(enable, 1000);
-    } else if (action == "flee") {
-
-        //HANDLER HERE
+    } else if (action == "block") {
+        block();
         setTimeout(enable, 1000);
     }
 }
@@ -708,6 +711,8 @@ function heal() {
         turn++;
         cooldown--;
         currentPotion--;
+        
+
         var result = roll(10);
         if (result + health >= 100) {
             health = 100;            
@@ -725,6 +730,30 @@ function heal() {
     } else {
         updateLog('You do not have any potions!', 'cooldown-log')
     }
+}
+
+function block() {
+    turn++;
+    cooldown--;
+    healTurn++;
+    calcHeal();
+
+    armourBuff = true;
+    normalArmour = armour;
+    armour = armour + 4;
+    updateLog('You used <i>Anticipate</i>! Turn: ' + turn)
+    soundHandler('block');
+    update();
+    setTimeout(function () {
+        monsterAttack(monsterCount);
+    }, 1000);
+    setTimeout(function () {
+        armour = normalArmour;
+        armourBuff = false;
+        update();
+    }, 1000);
+    
+    
 }
 
 // Damage of weapon, and armour class of opponent, and multiplier of dice n(Dx)
@@ -773,10 +802,12 @@ $(document).ready(function () {
     let attack = "Make an attack roll.";
     let special = "Perform a special attack. Specials take 4 turns to recharge."
     let heal = "Heal for 1d10 damage. Potions take 4 turns to recharge."
+    let block = "You anticipate your foe's next attack. Raise your AC by 4 for 1 turn."
 
     $('#attack').attr('title', attack);
     $('#special').attr('title', special);
     $('#heal').attr('title', heal);
+    $('#block').attr('title', block);
 
     tippy('.attack', {
         placement: 'bottom',
@@ -791,6 +822,12 @@ $(document).ready(function () {
     });
 
     tippy('.heal', {
+        placement: 'bottom',
+        animation: 'fade',
+        arrow: true
+    });
+
+    tippy('.block', {
         placement: 'bottom',
         animation: 'fade',
         arrow: true
@@ -928,5 +965,11 @@ function soundHandler(sound) {
         audio.volume = 0.1;
         audio.play();
         break;       
+
+        case 'block':
+        var audio = new Audio('assets/block.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        break;   
     }
 }

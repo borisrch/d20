@@ -1,18 +1,19 @@
 # Guide
 ## Quick Links
-- Weapons
-    - Shortsword
-    - Scimitar
-    - Greataxe
-    - Mithril Whip
-    - Scythe
-- Monsters
-    - Goblin
-    - Hill Giant
-    - Minotaur
-    - Werewolf
-    - Griffin
-    - Red Dragon
+- [Weapons](#weapons-and-special-attacks)
+    - [Shortsword](#shortsword)
+    - [Scimitar](#scimitar)
+    - [Great-axe](#great-axe)
+    - [Mithril Whip](#mithril-whip)
+    - [Scythe](#scythe)
+- [Monsters](#monsters)
+    - [Goblin](#goblin)
+    - [Hill Giant](#hill-giant)
+    - [Minotaur](#minotaur)
+    - [Werewolf](#werewolf)
+    - [Griffin](#griffin)
+    - [Red Dragon](#red-dragon)
+- [Mechanics](#mechanics)
 
 ## Weapons and Special Attacks
 
@@ -36,10 +37,10 @@
 - A legendary whip, made from the scales of a mithril meteorite ore. It crackles with seismic energy. Deals **1d10** damage per basic attack.
 - Special: **Soul Split** - Seismic energy lets you deal **2d5** damage, and heal the damage you deal.
 
- ### Scythe
+### Scythe
 
- - A blade with an elven design in nature, and is very effecient in killing. Deals **1d12** damage per basic attack.
- - Special: **Elven Guillotine** - Precision and grace lets you, to deal a total of **3d10** damage.
+- A blade with an elven design in nature, and is very effecient in killing. Deals **1d12** damage per basic attack.
+- Special: **Elven Guillotine** - Precision and grace lets you, to deal a total of **3d10** damage.
 
 ## Monsters
 
@@ -79,7 +80,7 @@
 
 ### Red Dragon
 
-- Ability 1: **Igni** - The dragon's flames protect from all non-magical damage next turn.
+- Ability 1: **Igni** - The dragon's flames burn down your armour class by 2, permanently.
 - Ability 2: **Torment** - The dragon steals your life essence, for his own. Deals **1d20** damage, and will heal the damage dealt.
 - Ability 3: **Anguish** - The dragon deals more damage based on how much health you are missing. Deals a base of **1d8 damage plus another die roll for every 10 health you are missing**.
 - Ability 4: **Turmoil** - The dragon commands you to miss your turn, strikes you for **1d10** damage, and then casts an ability on you (cannot be turmoil again).
@@ -87,5 +88,6 @@
 
 ## Mechanics
 
-- Health Potions and Special Attacks take 4 of your turns to recharge. You can only have a maximum of 4 health potions at a time.
+- Health Potions and Special Attacks take 4 of your turns to recharge. 
+- You can only have a maximum of 4 health potions at a time.
 - The Werewolf, Griffin and Red Dragon mobs are designed to be very challenging, so make sure you know what the mobs do, and also know your weapons, and strategize when to use which special attacks.
