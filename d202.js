@@ -135,8 +135,7 @@ function specialHandler() {
             break;
 
             case weapon[4]:
-            // Scythe
-            damage = 10;
+            scythe();
             break;
 
             case weapon[4]:
