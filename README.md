@@ -30,7 +30,7 @@
 ### Great-axe
 
 - A huge great-axe from Skellige, one you can barely lift, carrying weight from its ancestral home. Deals **1d10** damage per basic attack.
-- Special: **Wretched Sunder** - The lower your health, the more damage you do. For every 10 HP you have lost, add another die to the base **1d8** damage. (e.g. missing 40 HP will do 4d8 damage).
+- Special: **Wretched Sunder** - The lower your health, the more damage you do. For every 10 HP you have lost, add another die to the base **1d6** damage. (e.g. missing 40 HP will do 4d6 damage).
 
 ### Mithril Whip
 
@@ -56,7 +56,7 @@
 
 ### Minotaur
 
-- A minotaur combines the features of a human and bull, with the armour and musculature of a hulking humanoid, but with cloven hooves, a bovine tail, and, most distinctive of all, a bull's head. Deals **1d8** damage per basic attack, and has an armour class of **10**. 
+- A minotaur combines the features of a human and bull, with the armour and musculature of a hulking humanoid, but with cloven hooves, a bovine tail, and, most distinctive of all, a bull's head. Deals **1d8** damage per basic attack, and has an armour class of **10**. After defeating the minotaur, your armour class will be leveled to **10**.
 
 - Ability 1: **Unbreakable (20%)** - The minotaur gains an additional **5** armour class for the next turn.
 - Ability 2: **Stampede (10%)** - The minotaur goes into a stampede, attacking you for **1d8** damage while lowering your armour class by **5**.
@@ -71,7 +71,7 @@
 
 ### Griffin
 
-- The griffin is a creature with the body, legs, and tail of a lion and the head, wings, and talons of an eagle. The griffin preys on large mammals and, being a highly territorial creature, fiercely defends its hunting grounds. Griffins are tough opponents and their strength should not be underestimated.
+- The griffin is a creature with the body, legs, and tail of a lion and the head, wings, and talons of an eagle. The griffin preys on large mammals and, being a highly territorial creature, fiercely defends its hunting grounds. Griffins are tough opponents and their strength should not be underestimated. Deals **1d12** damage per basic attack, and has an armour class of **12**. After deafeating the griffin, your armour class will be leveled to **12**, and you will regain max HP.
 
 - Ability 1: **Skydive (10%)** - The griffin flies up and swoops down to deal **1d20** damage.
 - Ability 2: **Iron Talons (10%)** - The griffin claws through your armour, ignoring your armour class to deal **1d12** damage.
@@ -80,11 +80,18 @@
 
 ### Red Dragon
 
-- Ability 1: **Igni** - The dragon's flames burn down your armour class by 2, permanently.
-- Ability 2: **Torment** - The dragon steals your life essence, for his own. Deals **1d20** damage, and will heal the damage dealt.
-- Ability 3: **Anguish** - The dragon deals more damage based on how much health you are missing. Deals a base of **1d8 damage plus another die roll for every 10 health you are missing**.
-- Ability 4: **Turmoil** - The dragon commands you to miss your turn, strikes you for **1d10** damage, and then casts an ability on you (cannot be turmoil again).
-- Ability 5: **Imperium** - You are reduced to 10 health.
+- True dragons are known and feared for their predatory cunning and their magic, with the oldest dragons accounted as some of the most powerful creatures in the world. Apart from cats, dragons are the only creatures known to absorb magical energy. Deals **1d12** damage per basic attack, and has an armour class of **14**
+
+- Ability 1: **Dragonfire (5%)** - The dragon's flames burn down your armour class by 1, permanently. If you are at 0 AC then you will take **1d10** damage instead.
+- Ability 2: **Torment (10%)** - The dragon steals your life essence, for his own. Deals **1d20** damage, and will heal the damage dealt.
+- Ability 3: **Anguish (10%)** - The dragon deals more damage based on how much health you are missing. Deals a base of **1d4 damage plus another die roll for every 10 health you are missing**.
+- Ability 4: **Imperium* (5%)** - The dragon commands you to miss your turn, strikes you for **1d10** damage, and then casts an ability on you (excluding this ability).
+- Ability 5: **Reprisal (5%)** - The dragon attacks you with your special attack, with a bonus:
+    - Shortsword: Deals **2d6 + 10** damage!
+    - Scimitar: Deals **1d4** damage, and you lose that in armour class as well.
+    - Great-axe: The **Anguish** ability is added on to the existing special attack.
+    - Mithril whip: The **Torment** ability is added on to the existing special attack.
+    - Scythe: Performs the **Elven Guillotine**, while ignore all of your armour.
 
 ## Mechanics
 

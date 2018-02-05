@@ -51,7 +51,7 @@ function handler(action) {
     $('#attack').attr('disabled', 'disabled');
     $('#special').attr('disabled', 'disabled');
     $('#heal').attr('disabled', 'disabled');
-    $('#flee').attr('disabled', 'disabled');
+    $('#block').attr('disabled', 'disabled');
 
     if (action == "attack") {
         attackHandler();
@@ -207,13 +207,13 @@ function scimitar() {
 }
 
 function greataxe() {
-    let result = attack(damage, monsterArmour, 1);
+    let result = attack(8, monsterArmour, 1);
     if (result != 0) {
 
         var healthOffset = 100 - health;
         healthOffset = healthOffset - (healthOffset % 10);
         healthOffset = healthOffset / 10;
-        secondRoll = attack(damage, 0, healthOffset);
+        secondRoll = attack(8, 0, healthOffset);
         result = result + secondRoll;
         
         soundHandler('Great-axe');
@@ -599,6 +599,9 @@ function griffin() {
     }
 }
 
+function dragon() {
+
+}
 
 // 
 
@@ -660,7 +663,7 @@ function playerDeath() {
     $('#attack').remove();
     $('#special').remove();
     $('#heal').remove();
-    $('#flee').remove();
+    $('#block').remove();
 }
 
 function weaponSwitch() {
