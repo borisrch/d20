@@ -6,6 +6,7 @@
     - [Great-axe](#great-axe)
     - [Mithril Whip](#mithril-whip)
     - [Scythe](#scythe)
+    - [Aegis](#aegis)
 - [Monsters](#monsters)
     - [Goblin](#goblin)
     - [Hill Giant](#hill-giant)
@@ -41,6 +42,11 @@
 
 - A blade with an elven design in nature, and is very effecient in killing. Deals **1d12** damage per basic attack.
 - Special: **Elven Guillotine** - Precision and grace lets you, to deal a total of **3d10** damage.
+
+### Aegis
+
+- A legendary shield dropped by the Griffin. Deals **no** damage per basic attack.
+- Special: **Immortal** - Heal 1d20 + 10 damage.
 
 ## Monsters
 
@@ -82,16 +88,11 @@
 
 - True dragons are known and feared for their predatory cunning and their magic, with the oldest dragons accounted as some of the most powerful creatures in the world. Apart from cats, dragons are the only creatures known to absorb magical energy. Deals **1d12** damage per basic attack, and has an armour class of **14**
 
-- Ability 1: **Dragonfire (5%)** - The dragon's flames burn down your armour class by 1, permanently. If you are at 0 AC then you will take **1d10** damage instead.
+- Ability 1: **Dragonfire (5%)** - The dragon's flames burn down your armour class by 1, permanently. If you are at 0 AC then you will take **2d10** damage instead.
 - Ability 2: **Torment (10%)** - The dragon steals your life essence, for his own. Deals **1d20** damage, and will heal the damage dealt.
 - Ability 3: **Anguish (10%)** - The dragon deals more damage based on how much health you are missing. Deals a base of **1d4 damage plus another die roll for every 10 health you are missing**.
-- Ability 4: **Imperium* (5%)** - The dragon commands you to miss your turn, strikes you for **1d10** damage, and then casts an ability on you (excluding this ability).
-- Ability 5: **Reprisal (5%)** - The dragon attacks you with your special attack, with a bonus:
-    - Shortsword: Deals **2d6 + 10** damage!
-    - Scimitar: Deals **1d4** damage, and you lose that in armour class as well.
-    - Great-axe: The **Anguish** ability is added on to the existing special attack.
-    - Mithril whip: The **Torment** ability is added on to the existing special attack.
-    - Scythe: Performs the **Elven Guillotine**, while ignore all of your armour.
+- Ability 4: **Imperium (5%)** - The dragon commands you to miss your turn, strikes you for **1d10** damage, and then casts an ability on you (excluding this ability).
+- Ability 5: **Dragon Aspect (5%)** - The dragon gains 2 damage permanently, and slices you for **1d12** damage.
 
 ## Mechanics
 
