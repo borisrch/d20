@@ -871,6 +871,11 @@ function d() {
 // 
 
 function monsterDeath() {
+
+    if (monsterCount == 5) {
+        dragonDeath();
+    } else {
+
     updateLog('You have slain: ' + monster[monsterCount]);
     weaponCount++;
 
@@ -928,7 +933,27 @@ function monsterDeath() {
             monsterHealth = 100;
             update();
             break;
+        }
     }
+}
+
+function dragonDeath() {
+    monsterHealth = 1;
+    update();
+    $('#attack').attr('disabled', 'disabled');
+    $('#special').attr('disabled', 'disabled');
+    $('#heal').attr('disabled', 'disabled');
+    $('#block').attr('disabled', 'disabled');
+    updateLog("You: You're... Immortal?");
+    setTimeout(function() {
+        updateLog("Dragon: Yes.")
+    }, 3000);
+    setTimeout(function() {
+        updateLog('<b>Dragon</b> uses <i>Absorb Soul</i> for ' + health + ' damage! ' + 'Turn: ' + turn, 'special-log');
+                soundHandler('dragon-2');
+                playerDeath();
+
+    }, 4000);
 }
 
 function playerDeath() {

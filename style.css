@@ -95,7 +95,7 @@
     padding-top: 10px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     .container {
         grid-template-columns: 1fr;
     }
